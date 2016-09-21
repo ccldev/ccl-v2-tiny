@@ -11,7 +11,6 @@ public class CodeSnippet implements CompileOut {
 
 	public CodeSnippet(String raw) {
 		this.raw = raw;
-		System.out.println(raw + "\n---");
 	}
 	
 	@Override
@@ -21,7 +20,7 @@ public class CodeSnippet implements CompileOut {
 
 	@Override
 	public OutputStream out() {
-		throw new RuntimeException("NI");
+		return null;
 	}
 
 }

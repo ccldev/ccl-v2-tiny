@@ -21,12 +21,19 @@ public class CodeReader {
 		loop:
 		while((val = input.next()) >= 0){
 			builder.append((char) val);
-			if(unescape){unescape = false; continue;}
+			if(unescape){
+				unescape = false;
+				continue;
+			}
+			if(val == '\\'){
+				unescape = true;
+				continue;
+			}
 			if(inString){
 				if(val == '"') inString = false;
+				continue;
 			}
 			switch(val){
-			case '\\': unescape = true; break;
 			case '{': layer++; break;
 			case '}': layer--; if(layer == 0) break loop; break;
 			case '"': inString = true; break;
