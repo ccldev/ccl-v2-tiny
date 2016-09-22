@@ -16,5 +16,6 @@ public abstract class BlockSurround {
 
 	public abstract String getBefore(String keyword, String condition);
 	public abstract String getAfter(String keyword, String condition);
+	public abstract void update(long i);
 
 }

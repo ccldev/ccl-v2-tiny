@@ -59,6 +59,7 @@ public class CodeBlock implements CompileOut {
 			builder.append(CodePartCompiler.compile(p).compiled() + "\n");
 		}
 		BlockSurround surround = BlockSurround.get(keyword);
+		surround.update(globalCount);
 		return surround.getBefore(keyword, condition) + 
 				"\n" + builder.toString() + 
 				"\n" + surround.getAfter(keyword, condition);
