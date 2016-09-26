@@ -1,7 +1,5 @@
 package ccl.v2.pre;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import ccl.v1.Function;
@@ -14,8 +12,6 @@ public class PreProcessor {
 	private Input input;
 	private StringBuilder content;
 	private boolean acted;
-	
-	private List<String> included = new ArrayList<String>();
 	
 	public PreProcessor(Input input) {
 		super();
