@@ -1,59 +1,24 @@
 package ccl.v2;
 
 import ccl.v1.read.Input;
+import ccl.v2.layer.LayerExit;
+import ccl.v2.layer.LayerSystem;
 
 public class CodeReader {
 	
 	private Input input;
-	
-	private int layer;
-	private boolean unescape;
-	private boolean inString;
 
 	public CodeReader(Input in){
 		this.input = in;
 	}
 	
 	public CodePart next(){
-		StringBuilder builder = new StringBuilder();
+		LayerSystem sys = new LayerSystem('{', '}',false, LayerExit.EXIT_ON_ZERO, ';');
 		
-		int val;
-		loop:
-		while((val = input.next()) >= 0){
-			builder.append((char) val);
-			if(unescape){
-				unescape = false;
-				continue;
-			}
-			if(val == '\\'){
-				unescape = true;
-				continue;
-			}
-			if(inString){
-				if(val == '"') inString = false;
-				continue;
-			}
-			switch(val){
-			case '{': layer++; break;
-			case '}': layer--; if(layer == 0) break loop; break;
-			case '"': inString = true; break;
-			case ';': if(!inString && layer==0) break loop;
-			}
-		}
+		sys.feed(input);
+		sys.check();
 		
-		if(layer != 0){
-			System.err.println(builder);
-			throw new RuntimeException("Invalid Code part! layer=" + layer);
-		}
-		if(unescape){
-			System.err.println(builder);
-			throw new RuntimeException("Invalid Code part! unescape is true");
-		}
-		if(inString){
-			System.err.println(builder);
-			throw new RuntimeException("Invalid Code part! inString is true");
-		}
-		return new CodePart(builder.toString());
+		return new CodePart(sys.getList().get(0));
 	}
 	
 }

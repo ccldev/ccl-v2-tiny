@@ -19,23 +19,17 @@ public class CodeBlock implements CompileOut {
 			("(.*)\\s*\\{\\s*(.*)\\s*\\}\\s*", Pattern.DOTALL);
 	private static final Pattern KEYWORD_PATTERN = Pattern.compile
 			("\\s*([a-zA-Z][a-zA-Z0-9_]*)\\s*\\((.*)\\)\\s*");
-	
-	private String raw;
 
 	private Matcher matcher;
 	
 	private String before;
-	private String content;
 	private String keyword;
 	private String condition;
-	private BlockSurround blockSurround;
 
 	public CodeBlock(String raw) {
-		this.raw = raw;
 		this.matcher = BLOCK_PATTERN.matcher(raw);
 		matcher.find();
 		this.before = matcher.group(1).trim();
-		this.content = matcher.group(2).trim();
 		initBefore();
 	}
 
@@ -45,8 +39,7 @@ public class CodeBlock implements CompileOut {
 		m.find();
 		this.keyword = m.group(1).trim();
 		this.condition = m.group(2).trim();
-		this.blockSurround = BlockSurround.get(keyword);
-	}
+		}
 
 	@Override
 	public String compiled() {
