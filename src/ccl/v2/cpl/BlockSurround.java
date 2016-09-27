@@ -14,8 +14,8 @@ public abstract class BlockSurround {
 		map.put(keyword, surround);
 	}
 
-	public abstract String getBefore(String keyword, String condition);
-	public abstract String getAfter(String keyword, String condition);
+	public abstract String getBefore(String keyword, String condition, String identifier);
+	public abstract String getAfter(String keyword, String condition, String identifier);
 	public abstract void update(long i);
 
 }

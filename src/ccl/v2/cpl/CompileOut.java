@@ -1,10 +1,11 @@
 package ccl.v2.cpl;
 
-import java.io.OutputStream;
+import java.io.File;
 
 public interface CompileOut {
 	
 	String compiled();
-	OutputStream out();
+	File out();
+	String include();
 	
 }
