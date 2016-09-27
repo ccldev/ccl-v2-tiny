@@ -1,6 +1,7 @@
 package ccl.v2.layer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ccl.v1.read.Input;
@@ -12,8 +13,8 @@ public class LayerSystem {
 	private int layer = 0;
 	private List<String> list = new ArrayList<String>();
 	
-	private char opener;
-	private char closer;
+	private char[] opener;
+	private char[] closer;
 	private LayerExit exit;
 	private char[] zeroBreakers;
 	private boolean seperate;
@@ -22,11 +23,11 @@ public class LayerSystem {
 		return list;
 	}
 
-	public char getOpener() {
+	public char[] getOpener() {
 		return opener;
 	}
 
-	public char getCloser() {
+	public char[] getCloser() {
 		return closer;
 	}
 
@@ -35,6 +36,13 @@ public class LayerSystem {
 	}
 
 	public LayerSystem(char opener, char closer, boolean seperate, LayerExit exit, char... zeroBreakers){
+		this.opener = new char[]{opener};
+		this.closer = new char[]{closer};
+		this.exit = exit;
+		this.zeroBreakers = zeroBreakers;
+		this.seperate = seperate;
+	}
+	public LayerSystem(char[] opener, char[] closer, boolean seperate, LayerExit exit, char... zeroBreakers){
 		this.opener = opener;
 		this.closer = closer;
 		this.exit = exit;
@@ -67,9 +75,9 @@ public class LayerSystem {
 			}
 			if(c == '"'){
 				inString = true;
-			}else if(c == opener){
+			}else if(Arrays.asList(opener).contains(c)){
 				layer++;
-			}else if(c == closer){
+			}else if(Arrays.asList(closer).contains(c)){
 				layer--;
 				if(layer <= -1) throw new RuntimeException("Negative layer " + layer);
 				if(layer == 0){
@@ -77,8 +85,9 @@ public class LayerSystem {
 					temp = new StringBuilder();
 					if(exit == LayerExit.EXIT_ON_ZERO) return ctr;
 				}
-			}else if(c == ',' && seperate){
-				if(layer == 0){
+			}else if(c == ','){
+				System.out.println(layer);
+				if(layer == 0 && seperate){
 					String str = temp.toString();
 					list.add(str.substring(0, str.length() - 1).trim());
 					temp = new StringBuilder();

@@ -7,6 +7,8 @@ public class CompileSystems {
 	private static ArrayList<CompileSystem> list = new ArrayList<CompileSystem>();
 	
 	public static String use(String snippet){
+		System.out.println(snippet);
+		System.out.println("---");
 		for(int i = 0; i < list.size(); i++){
 			CompileSystem sys = list.get(i);
 			if(sys.accept(snippet)){
