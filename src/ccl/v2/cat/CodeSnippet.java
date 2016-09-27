@@ -1,6 +1,5 @@
 package ccl.v2.cat;
 
-import java.io.File;
 import java.io.OutputStream;
 
 import ccl.v2.cpl.CompileOut;
@@ -20,12 +19,8 @@ public class CodeSnippet implements CompileOut {
 	}
 
 	@Override
-	public File out() {
+	public OutputStream out() {
 		return null;
-	}
-	
-	public String include(){
-		return "";
 	}
 
 }
