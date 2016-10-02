@@ -29,15 +29,20 @@ public class LayerSystem {
 	private StringBuilder current;
 	private int lastLayer;
 	private int minimumLayer;
+	private boolean breakOnZero = true;
 
 	private List<String> list;
 	
+	public void setBreakOnZero(boolean breakOnZero) {
+		this.breakOnZero = breakOnZero;
+	}
+
 	public void setMinimumLayer(int minimumLayer) {
 		this.minimumLayer = minimumLayer;
 	}
 	
 	public boolean isAllZero() {
-		return isBiggest(0);
+		return state.isBiggest(0);
 	}
 
 	public boolean isFinished() {
@@ -50,7 +55,8 @@ public class LayerSystem {
 		}
 	}
 	
-	public List<String> getList(){
+	public List<String> getList() throws DebugException{
+		check();
 		if(current.toString().length() > 0){
 			list.add(current.toString());
 			current = new StringBuilder();
@@ -71,19 +77,16 @@ public class LayerSystem {
 			current.append(c);
 		}
 		
-		finished = isBiggest(minimumLayer) && lastLayer > minimumLayer || isBiggest(minimumLayer) && state.isBreaker(c);
+		finished = state.isBiggest(minimumLayer) && lastLayer > minimumLayer || state.isBiggest(minimumLayer) && state.isBreaker(c);
+		finished = finished && !state.inProgress();
 		lastLayer = state.get(Operators.GREATER_THEN);
-		if(finished){
+		if(finished && (breakOnZero || state.isBreaker(c))){
 			list.add(current.toString());
 			current = new StringBuilder();
 		}
 	}
-
-	private boolean isBiggest(int layer) {
-		return state.get(Operators.GREATER_THEN) == layer;
-	}
 	
-	public void check() throws DebugException{
+	private void check() throws DebugException{
 		if(!isAllZero()) throw new DebugException("All layers should be zero at this point!\n: " + state.getDebugInfo());
 	}
 

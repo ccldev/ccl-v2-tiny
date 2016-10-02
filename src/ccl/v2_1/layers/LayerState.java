@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import ccl.v1.Function;
 import ccl.v2_1.err.ImplementationException;
+import ccl.v2_1.operators.Operators;
 
 public class LayerState {
 	
@@ -40,21 +41,27 @@ public class LayerState {
 			unescaped = false;
 			return;
 		}
-		if(inString){
-			if(c == '"'){
-				inString = false;
-			}
-			return;
-		}
-		if(c == '"'){
-			inString = true;
-			return;
-		}
 		if(c == '\\'){
 			unescaped = true;
 			return;
 		}
+		if(!isInUse('"')){
+			if(inString){
+				if(c == '"'){
+					inString = false;
+				}
+				return;
+			}
+			if(c == '"'){
+				inString = true;
+				return;
+			}
+		}
 		for(int i = 0; i < layers.length; i++){
+			if(c == openers[i] && c == closers[i]){
+				layers[i] = layers[i] == 0 ? 1 : 0;
+				continue;
+			}
 			if(c == openers[i]){
 				layers[i]++;
 			}
@@ -64,11 +71,25 @@ public class LayerState {
 		}
 	}
 
+	private boolean isInUse(char c) {
+		for(int i = 0; i < openers.length; i++){
+			if(openers[i] == c) return true;
+		}
+		for(int i = 0; i < closers.length; i++){
+			if(closers[i] == c) return true;
+		}
+		return false;
+	}
+
 	public boolean isBreaker(char c) {
 		for(int i = 0; i < breakers.length; i++){
 			if(breakers[i] == c) return true;
 		}
 		return false;
+	}
+	
+	public boolean isBiggest(int layer) {
+		return get(Operators.GREATER_THEN) == layer;
 	}
 
 	@Override
@@ -98,6 +119,10 @@ public class LayerState {
 			}
 		}
 		return builder.toString();
+	}
+	
+	public boolean inProgress(){
+		return inString || unescaped;
 	}
 	
 }

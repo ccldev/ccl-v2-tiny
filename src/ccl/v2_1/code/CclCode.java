@@ -26,7 +26,6 @@ public class CclCode {
 		if(sys.isFinished()) throw new ImplementationException("Layer System may not be finished after creation!", sys);
 		
 		sys.feed(raw);
-		sys.check();
 		
 		return buildCodeParts0(sys.getList());
 	}

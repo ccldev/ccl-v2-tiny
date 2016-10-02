@@ -48,7 +48,7 @@ public class CclCodeBlock {
 		Matcher m = BASE_PATTERN.matcher(codePart.getRaw());
 		m.find();
 		CclCompileResult<File> res = CompileSystems.BLOCK.get(this);
-		throw new NI(codePart.toString());
+		return res.getResult();
 	}
 	
 	public String compileContent() throws DebugException, ImplementationException, FileNotFoundException{
