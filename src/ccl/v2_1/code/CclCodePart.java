@@ -1,6 +1,7 @@
 package ccl.v2_1.code;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 
 import ccl.v2_1.cat.CclCodeBlock;
@@ -27,7 +28,7 @@ public class CclCodePart extends CclCode {
 		return getRaw().endsWith(";");
 	}
 	
-	public String compile() throws DebugException, ImplementationException, FileNotFoundException{
+	public String compile() throws DebugException, ImplementationException, IOException{
 		if(isEmpty()) return "";
 		if(isBlock()){
 			return new CclCodeBlock(this).compile();
@@ -40,7 +41,7 @@ public class CclCodePart extends CclCode {
 		return getRaw().trim().isEmpty();
 	}
 
-	public static String compileAll(CclCodePart... parts) throws DebugException, ImplementationException, FileNotFoundException {
+	public static String compileAll(CclCodePart... parts) throws DebugException, ImplementationException, IOException {
 		StringBuilder builder = new StringBuilder();
 		for(int i = 0; i < parts.length; i++){
 			builder.append(parts[i].compile());

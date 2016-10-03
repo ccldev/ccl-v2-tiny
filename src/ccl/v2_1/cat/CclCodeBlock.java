@@ -2,11 +2,14 @@ package ccl.v2_1.cat;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.compile.CclCompileResult;
+import ccl.v2_1.compile.Finisher;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 import ccl.v2_1.err.NI;
@@ -44,14 +47,14 @@ public class CclCodeBlock {
 		}
 	}
 
-	public String compile() throws DebugException, ImplementationException {
+	public String compile() throws DebugException, ImplementationException, IOException {
 		Matcher m = BASE_PATTERN.matcher(codePart.getRaw());
 		m.find();
 		CclCompileResult<File> res = CompileSystems.BLOCK.get(this);
-		return res.getResult();
+		return Finisher.finish(res);
 	}
 	
-	public String compileContent() throws DebugException, ImplementationException, FileNotFoundException{
+	public String compileContent() throws DebugException, ImplementationException, IOException{
 		return CclCodePart.compileAll(codePart.buildCodeParts(1));
 	}
 

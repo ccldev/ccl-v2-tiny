@@ -2,10 +2,12 @@ package ccl.v2_1.cat;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.compile.CclCompileResult;
+import ccl.v2_1.compile.Finisher;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 import ccl.v2_1.err.NI;
@@ -23,16 +25,9 @@ public class CclCodeSnippet {
 		return codePart.getRaw();
 	}
 
-	public String compile() throws DebugException, ImplementationException, FileNotFoundException {
+	public String compile() throws DebugException, ImplementationException, IOException {
 		CclCompileResult<File> res = CompileSystems.SNIPPET.get(this);
-		if(res.getOutput() != null){
-			PrintStream stream = new PrintStream(res.getOutput());
-			stream.println(res.getResult());
-			stream.close();
-			return res.getInclude();
-		}else{
-			return res.getResult();
-		}
+		return Finisher.finish(res);
 	}
 
 }

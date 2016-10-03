@@ -1,5 +1,6 @@
 package ccl.v2_1.sys;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import ccl.v2_1.bridge.OldCompileSystem;
@@ -16,7 +17,7 @@ public class CompileSystemUser<I, O> {
 		systems = new ArrayList<>();
 	}
 	
-	public CclCompileResult<O> get(I input) throws DebugException, ImplementationException{
+	public CclCompileResult<O> get(I input) throws DebugException, ImplementationException, IOException{
 		for(int i = 0; i < systems.size(); i++){
 			CompileSystem<I, O> sys = systems.get(i);
 			if(sys.accept(input)){

@@ -9,5 +9,6 @@ public interface CompileSystems {
 	
 	CompileSystemUser<CclCodeBlock, File> BLOCK = new CompileSystemUser<>();
 	CompileSystemUser<CclCodeSnippet, File> SNIPPET = new CompileSystemUser<>();
+	CompileSystemUser<String, Void> PRE = new CompileSystemUser<>();
 	
 }
