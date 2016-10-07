@@ -1,6 +1,8 @@
 package ccl.v2_1.err;
 
 public class DebugException extends Exception {
+	
+	private static final long serialVersionUID = 3249412821810131923L;
 
 	public DebugException() {
 		super();

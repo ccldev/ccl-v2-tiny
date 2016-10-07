@@ -1,9 +1,7 @@
 package ccl.v2_1.cat;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +10,6 @@ import ccl.v2_1.compile.CclCompileResult;
 import ccl.v2_1.compile.Finisher;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.err.NI;
 import ccl.v2_1.sys.CompileSystems;
 
 public class CclCodeBlock {

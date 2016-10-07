@@ -1,6 +1,8 @@
 package ccl.v2_1.err;
 
 public class NI extends RuntimeException {
+	
+	private static final long serialVersionUID = -2593030027397611421L;
 
 	public NI() {
 		super();

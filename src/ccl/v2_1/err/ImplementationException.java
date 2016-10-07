@@ -1,6 +1,8 @@
 package ccl.v2_1.err;
 
 public class ImplementationException extends Exception{
+	
+	private static final long serialVersionUID = 1864781876470279007L;
 
 	public ImplementationException() {
 		super();

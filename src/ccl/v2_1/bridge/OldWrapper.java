@@ -4,7 +4,6 @@ import java.io.File;
 
 import ccl.v2_1.cat.CclCodeSnippet;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.err.NI;
 import ccl.v2_1.sys.CompileSystem;
 
 public class OldWrapper implements CompileSystem<CclCodeSnippet, File>{

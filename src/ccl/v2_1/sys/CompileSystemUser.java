@@ -31,6 +31,7 @@ public class CompileSystemUser<I, O> {
 		systems.add(sys);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void add(OldCompileSystem sys) {
 		add((CompileSystem<I, O>) new OldWrapper(sys));
 	}
