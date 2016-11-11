@@ -89,7 +89,7 @@ public class LayerState {
 	}
 	
 	public boolean isBiggest(int layer) {
-		return get(Operators.GREATER_THEN) == layer;
+		return get(Operators.GREATER_THAN) == layer;
 	}
 
 	@Override

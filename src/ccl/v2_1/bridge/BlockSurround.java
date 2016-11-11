@@ -2,9 +2,10 @@ package ccl.v2_1.bridge;
 
 import java.io.File;
 
-import ccl.v2_1.cat.CclCodeBlock;
+import net.bplaced.opl.ccl.CompileSystem;
+import net.bplaced.opl.ccl.cat.CclCodeBlock;
+
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.sys.CompileSystem;
 
 public abstract class BlockSurround implements CompileSystem<CclCodeBlock, File>{
 

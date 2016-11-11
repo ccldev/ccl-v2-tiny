@@ -1,9 +1,11 @@
-package ccl.v2_1.sys;
+package net.bplaced.opl.ccl;
 
 import java.io.File;
 
-import ccl.v2_1.cat.CclCodeBlock;
-import ccl.v2_1.cat.CclCodeSnippet;
+import net.bplaced.opl.ccl.cat.CclCodeBlock;
+import net.bplaced.opl.ccl.cat.CclCodeSnippet;
+
+import ccl.v2_1.sys.CompileSystemUser;
 
 public interface CompileSystems {
 	

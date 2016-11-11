@@ -3,6 +3,8 @@ package ccl.v2_1.sys;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import net.bplaced.opl.ccl.CompileSystem;
+
 import ccl.v2_1.bridge.OldCompileSystem;
 import ccl.v2_1.bridge.OldWrapper;
 import ccl.v2_1.compile.CclCompileResult;

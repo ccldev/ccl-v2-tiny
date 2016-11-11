@@ -2,8 +2,9 @@ package ccl.v2_1.code;
 
 import java.io.IOException;
 
-import ccl.v2_1.cat.CclCodeBlock;
-import ccl.v2_1.cat.CclCodeSnippet;
+import net.bplaced.opl.ccl.cat.CclCodeBlock;
+import net.bplaced.opl.ccl.cat.CclCodeSnippet;
+
 import ccl.v2_1.debug.DebugHelper;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;

@@ -69,9 +69,9 @@ public class LayerSystem {
 			finished = false;
 		}
 		
-		boolean b1 = state.get(Operators.GREATER_THEN) >= minimumLayer;
+		boolean b1 = state.get(Operators.GREATER_THAN) >= minimumLayer;
 		state.feed(c);
-		boolean b2 = state.get(Operators.GREATER_THEN) >= minimumLayer;
+		boolean b2 = state.get(Operators.GREATER_THAN) >= minimumLayer;
 		
 		if(b1 && b2){
 			current.append(c);
@@ -79,7 +79,7 @@ public class LayerSystem {
 		
 		finished = state.isBiggest(minimumLayer) && lastLayer > minimumLayer || state.isBiggest(minimumLayer) && state.isBreaker(c);
 		finished = finished && !state.inProgress();
-		lastLayer = state.get(Operators.GREATER_THEN);
+		lastLayer = state.get(Operators.GREATER_THAN);
 		if(finished && (breakOnZero || state.isBreaker(c))){
 			list.add(current.toString());
 			current = new StringBuilder();
