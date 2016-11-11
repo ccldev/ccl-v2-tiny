@@ -5,7 +5,6 @@ import java.io.File;
 import net.bplaced.opl.ccl.cat.CclCodeBlock;
 import net.bplaced.opl.ccl.cat.CclCodeSnippet;
 
-import ccl.v2_1.sys.CompileSystemUser;
 
 public interface CompileSystems {
 	

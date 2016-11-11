@@ -1,9 +1,8 @@
-package ccl.v2_1.sys;
+package net.bplaced.opl.ccl;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import net.bplaced.opl.ccl.CompileSystem;
 
 import ccl.v2_1.bridge.OldCompileSystem;
 import ccl.v2_1.bridge.OldWrapper;
