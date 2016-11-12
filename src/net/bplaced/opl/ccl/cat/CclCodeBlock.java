@@ -18,7 +18,7 @@ public class CclCodeBlock {
 	private static final Pattern BASE_PATTERN = Pattern.compile
 			("([^\\{\\}]*)\\{(.*)\\}", Pattern.DOTALL);
 	private static final Pattern CONDITION_PATTERN = Pattern.compile
-			("([^\\(\\)]*)\\((.*)\\)", Pattern.DOTALL);
+			("([^\\(\\)]*)\\((.*)\\)(.*)", Pattern.DOTALL);
 	
 	private CclCodePart codePart;
 
@@ -26,6 +26,7 @@ public class CclCodeBlock {
 	private String content;
 	private String keyword;
 	private String condition;
+	private String afterCondition;
 	
 	public CclCodeBlock(CclCodePart codePart) {
 		this.codePart = codePart;
@@ -35,19 +36,20 @@ public class CclCodeBlock {
 	private void analyze() {
 		String raw = codePart.getRaw().trim();
 		Matcher m = BASE_PATTERN.matcher(raw);
-		m.find();
+		m.matches();
 		this.before = m.group(1).trim();
 		this.content = m.group(2).trim();
 		m = CONDITION_PATTERN.matcher(before);
-		if(m.find()){
+		if(m.matches()){
 			this.keyword = m.group(1).trim();
 			this.condition = m.group(2).trim();
+			this.afterCondition = m.group(3).trim();
 		}
 	}
 
 	public String compile() throws DebugException, ImplementationException, IOException {
 		Matcher m = BASE_PATTERN.matcher(codePart.getRaw());
-		m.find();
+		m.matches();
 		CclCompileResult<File> res = CompileSystems.BLOCK.get(this);
 		return Finisher.finish(res);
 	}
@@ -77,6 +79,10 @@ public class CclCodeBlock {
 
 	public String getCondition() {
 		return condition;
+	}
+	
+	public String getAfterCondition() {
+		return afterCondition;
 	}
 
 	public CclCodePart getCodePart() {
