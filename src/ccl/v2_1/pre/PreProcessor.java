@@ -13,7 +13,9 @@ public class PreProcessor {
 
 	public void process(String nextLine) throws DebugException, ImplementationException, IOException {
 		nextLine = nextLine.trim();
-		if(nextLine.startsWith("#")){
+		if(nextLine.startsWith("//")){
+			
+		}else if(nextLine.startsWith("#")){
 			builder.append(CompileSystems.PRE.get(nextLine).getResult());
 		}else{
 			builder.append(nextLine);
