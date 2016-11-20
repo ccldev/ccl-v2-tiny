@@ -3,9 +3,6 @@ package net.bplaced.opl.ccl;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
-import ccl.v2_1.bridge.OldCompileSystem;
-import ccl.v2_1.bridge.OldWrapper;
 import ccl.v2_1.compile.CclCompileResult;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
@@ -30,11 +27,6 @@ public class CompileSystemUser<I, O> {
 	
 	public void add(CompileSystem<I, O> sys){
 		systems.add(sys);
-	}
-
-	@SuppressWarnings("unchecked")
-	public void add(OldCompileSystem sys) {
-		add((CompileSystem<I, O>) new OldWrapper(sys));
 	}
 	
 }
