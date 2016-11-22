@@ -19,6 +19,8 @@ public class CclCodeBlock {
 			("([^\\{\\}]*)\\{(.*)\\}", Pattern.DOTALL);
 	private static final Pattern CONDITION_PATTERN = Pattern.compile
 			("([^\\(\\)]*)\\((.*)\\)(.*)", Pattern.DOTALL);
+	private static final Pattern KEYWORD_PATTERN = Pattern.compile
+			("([^\\(\\)]*)", Pattern.DOTALL);
 	
 	private CclCodePart codePart;
 
@@ -27,9 +29,11 @@ public class CclCodeBlock {
 	private String keyword;
 	private String condition;
 	private String afterCondition;
+	private CclCodePart following;
 	
-	public CclCodeBlock(CclCodePart codePart) {
+	public CclCodeBlock(CclCodePart codePart, CclCodePart following) {
 		this.codePart = codePart;
+		this.following = following;
 		analyze();
 	}
 
@@ -44,6 +48,8 @@ public class CclCodeBlock {
 			this.keyword = m.group(1).trim();
 			this.condition = m.group(2).trim();
 			this.afterCondition = m.group(3).trim();
+		}else if((m = KEYWORD_PATTERN.matcher(before)).find()){
+			this.keyword = m.group(1).trim();
 		}
 	}
 
@@ -67,6 +73,10 @@ public class CclCodeBlock {
 
 	public String getBefore() {
 		return before;
+	}
+	
+	public CclCodePart getFollowing() {
+		return following;
 	}
 
 	public String getContent() {

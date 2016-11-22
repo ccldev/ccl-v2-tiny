@@ -23,10 +23,10 @@ public class CclCodePart extends CclCode {
 		return getRaw().endsWith(";");
 	}
 	
-	public String compile() throws DebugException, ImplementationException, IOException{
+	public String compile(CclCodePart following) throws DebugException, ImplementationException, IOException{
 		if(isEmpty()) return "";
 		if(isBlock()){
-			return new CclCodeBlock(this).compile();
+			return new CclCodeBlock(this, following).compile();
 		}else if(isSnippet()){
 			return new CclCodeSnippet(this).compile();
 		}else throw new DebugException("Unable to categorize code! \n" + this.getRaw() + "\n---\n" + DebugHelper.getCategorizeInfo());
@@ -39,7 +39,7 @@ public class CclCodePart extends CclCode {
 	public static String compileAll(CclCodePart... parts) throws DebugException, ImplementationException, IOException {
 		StringBuilder builder = new StringBuilder();
 		for(int i = 0; i < parts.length; i++){
-			builder.append(parts[i].compile());
+			builder.append(parts[i].compile(i + 1 < parts.length ? parts[i+1] : null));
 			builder.append("\n");
 		}
 		return builder.toString();
