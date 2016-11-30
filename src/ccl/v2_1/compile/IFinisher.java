@@ -9,5 +9,6 @@ import ccl.v2_1.err.ImplementationException;
 public interface IFinisher {
 
 	String finish(CclCompileResult<File> res) throws IOException, DebugException, ImplementationException;
+	String finish(File method) throws IOException, DebugException, ImplementationException;
 	
 }

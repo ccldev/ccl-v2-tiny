@@ -13,6 +13,10 @@ public class Finisher {
 	public static String finish(CclCompileResult<File> res) throws IOException, DebugException, ImplementationException{
 		return finisher.finish(res);
 	}
+	
+	public static String finish(File m) throws IOException, DebugException, ImplementationException{
+		return finisher.finish(m);
+	}
 
 	public static void set(IFinisher finisherImpl) {
 		finisher = finisherImpl;
