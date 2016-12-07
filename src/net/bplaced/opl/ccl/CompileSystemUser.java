@@ -10,9 +10,15 @@ import ccl.v2_1.err.ImplementationException;
 public class CompileSystemUser<I, O> {
 	
 	private ArrayList<CompileSystem<I, O>> systems;
+	private CompileSystem<I, O> def;
 	
 	public CompileSystemUser(){
 		systems = new ArrayList<>();
+	}
+	
+	public CompileSystemUser<I, O> setDefault(CompileSystem<I, O> def){
+		this.def = def;
+		return this;
 	}
 	
 	public CclCompileResult<O> get(I input) throws DebugException, ImplementationException, IOException{
@@ -21,6 +27,9 @@ public class CompileSystemUser<I, O> {
 			if(sys.accept(input)){
 				return new CclCompileResult<O>(sys.compileComplete(input), sys.getOutput(), sys.include());
 			}
+		}
+		if(def != null){
+			return new CclCompileResult<O>(def.compileComplete(input), def.getOutput(), def.include());
 		}
 		throw new DebugException("No matching compile System found!");
 	}
