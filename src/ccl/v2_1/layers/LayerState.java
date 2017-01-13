@@ -1,8 +1,9 @@
 package ccl.v2_1.layers;
 
+import io.github.coalangsoft.lib.data.Func;
+
 import java.util.Arrays;
 
-import ccl.v1.Function;
 import ccl.v2_1.err.ImplementationException;
 import ccl.v2_1.operators.Operators;
 
@@ -25,7 +26,7 @@ public class LayerState {
 		this.breakers = breakers;
 	}
 
-	public int get(Function<Integer[], Boolean> op) {
+	public int get(Func<Integer[], Boolean> op) {
 		Integer ret = null;
 		for(int i = 0; i < layers.length; i++){
 			if(ret == null){

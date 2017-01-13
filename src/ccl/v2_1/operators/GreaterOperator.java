@@ -1,8 +1,8 @@
 package ccl.v2_1.operators;
 
-import ccl.v1.Function;
+import io.github.coalangsoft.lib.data.Func;
 
-public class GreaterOperator implements Function<Integer[], Boolean> {
+public class GreaterOperator implements Func<Integer[], Boolean> {
 
 	@Override
 	public Boolean call(Integer[] arg) {
