@@ -2,6 +2,7 @@ package ccl.v2_1.code;
 
 import java.io.IOException;
 
+import io.github.coalangsoft.lib.log.Logger;
 import net.bplaced.opl.ccl.cat.CclCodeBlock;
 import net.bplaced.opl.ccl.cat.CclCodeSnippet;
 
@@ -29,7 +30,14 @@ public class CclCodePart extends CclCode {
 			return new CclCodeBlock(this, following).compile();
 		}else if(isSnippet()){
 			return new CclCodeSnippet(this).compile();
-		}else throw new DebugException("Unable to categorize code! \n" + this.getRaw() + "\n---\n" + DebugHelper.getCategorizeInfo());
+		}else{
+			Logger.err.log("Warning: Returning " + this.getRaw());
+			CclCodePart withSemicolon = new CclCodePart("return " + getRaw() + ";");
+			if(!withSemicolon.isSnippet()){
+				throw new DebugException("Semicolon insertion did not work!");
+			}
+			return new CclCodeSnippet(withSemicolon).compile();
+		}
 	}
 
 	private boolean isEmpty() {
