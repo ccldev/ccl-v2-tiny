@@ -16,7 +16,7 @@ public class LayerState {
 	private char[] closers;
 	private char[] breakers;
 	
-	public LayerState(char[] openers, char[] closers, char... breakers) throws ImplementationException{
+	public LayerState(char[] openers, char[] closers, char... breakers) throws ImplementationException {
 		if(openers.length != closers.length){
 			throw new ImplementationException("Every opener needs a closer!", openers, closers);
 		}
@@ -34,7 +34,7 @@ public class LayerState {
 			}
 			ret = op.call(new Integer[]{layers[i], ret}) ? layers[i] : ret;
 		}
-		return ret;
+		return ret == null ? 0 : ret;
 	}
 
 	public void feed(char c) {

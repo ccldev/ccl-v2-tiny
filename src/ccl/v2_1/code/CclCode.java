@@ -19,7 +19,8 @@ public class CclCode {
 	}
 	
 	public CclCodePart[] buildCodeParts(int minLayer) throws ImplementationException, DebugException{
-		LayerSystem sys = new LayerSystem('{', '}', ';');
+		LayerSystem sys = new LayerSystem(new char[]{'{'}, new char[]{'}'}, ';');
+		sys.setBreakOnZero(false);
 		sys.setMinimumLayer(minLayer);
 		if(!sys.isAllZero()) throw new ImplementationException("Layer System must be 'all-zero' after creation!", sys);
 		if(sys.isFinished()) throw new ImplementationException("Layer System may not be finished after creation!", sys);
