@@ -2,11 +2,9 @@ package ccl.v2_1.code;
 
 import java.io.IOException;
 
-import io.github.coalangsoft.lib.log.Logger;
-import net.bplaced.opl.ccl.cat.CclCodeBlock;
-import net.bplaced.opl.ccl.cat.CclCodeSnippet;
+import io.github.coalangsoft.cclproject.cat.CclCodeBlock;
+import io.github.coalangsoft.cclproject.cat.CclCodeSnippet;
 
-import ccl.v2_1.debug.DebugHelper;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 
@@ -16,7 +14,7 @@ public class CclCodePart extends CclCode {
 		super(code);
 	}
 	
-	public boolean isBlock(){
+	public boolean isBlock() throws ImplementationException {
 		return getRaw().endsWith("}");
 	}
 	

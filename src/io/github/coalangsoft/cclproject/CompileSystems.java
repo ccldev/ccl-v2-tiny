@@ -1,9 +1,9 @@
-package net.bplaced.opl.ccl;
+package io.github.coalangsoft.cclproject;
 
 import java.io.File;
 
-import net.bplaced.opl.ccl.cat.CclCodeBlock;
-import net.bplaced.opl.ccl.cat.CclCodeSnippet;
+import io.github.coalangsoft.cclproject.cat.CclCodeSnippet;
+import io.github.coalangsoft.cclproject.cat.CclCodeBlock;
 
 
 public interface CompileSystems {

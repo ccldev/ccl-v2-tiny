@@ -1,9 +1,9 @@
-package net.bplaced.opl.ccl.cat;
+package io.github.coalangsoft.cclproject.cat;
 
 import java.io.File;
 import java.io.IOException;
 
-import net.bplaced.opl.ccl.CompileSystems;
+import io.github.coalangsoft.cclproject.CompileSystems;
 
 import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.compile.CclCompileResult;

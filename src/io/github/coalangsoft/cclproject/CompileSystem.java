@@ -1,4 +1,4 @@
-package net.bplaced.opl.ccl;
+package io.github.coalangsoft.cclproject;
 
 import java.io.IOException;
 

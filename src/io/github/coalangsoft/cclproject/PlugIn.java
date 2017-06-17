@@ -1,4 +1,4 @@
-package net.bplaced.opl.ccl;
+package io.github.coalangsoft.cclproject;
 
 public interface PlugIn<I, O> extends CompileSystem<I, O>{
 	
