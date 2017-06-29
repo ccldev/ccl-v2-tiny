@@ -31,7 +31,7 @@ public class CompileSystemUser<I, O> {
 		if(def != null){
 			return new CclCompileResult<O>(def.compileComplete(input), def.getOutput(), def.include());
 		}
-		throw new DebugException("No matching compile System found!");
+		throw new DebugException("No matching compile System found! " + input);
 	}
 	
 	public void add(CompileSystem<I, O> sys){

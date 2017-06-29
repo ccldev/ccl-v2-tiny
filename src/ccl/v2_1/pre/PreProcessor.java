@@ -9,6 +9,7 @@ import io.github.coalangsoft.cclproject.CompileSystems;
 
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
+import io.github.coalangsoft.lib.log.Logger;
 
 import javax.swing.*;
 
@@ -63,7 +64,7 @@ public class PreProcessor {
 			if(charString.trim().isEmpty()){
 				//Keep going
 			}else if(charString.matches("[a-zA-Z0-0_@" + Constants.OPERATOR_CHARS + "]")){
-				//Following is a name - insert semicolon
+				//Following is a name
 				sb.append(';');
 				return;
 			}else{
@@ -72,4 +73,5 @@ public class PreProcessor {
 			}
 		}
 	}
+
 }
