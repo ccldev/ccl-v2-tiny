@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import ccl.v2_1.layers.LayerState;
 import io.github.coalangsoft.cclproject.CompileSystems;
 
 import ccl.v2_1.code.CclCodePart;
@@ -17,10 +18,6 @@ public class CclCodeBlock {
 
 	private static final Pattern BASE_PATTERN = Pattern.compile
 			("([^\\{\\}]*)\\{(.*)\\}", Pattern.DOTALL);
-	private static final Pattern CONDITION_PATTERN = Pattern.compile
-			("([^\\(\\)]*)\\((.*)\\)(.*)", Pattern.DOTALL);
-	private static final Pattern KEYWORD_PATTERN = Pattern.compile
-			("([^\\(\\)]*)", Pattern.DOTALL);
 	
 	private CclCodePart codePart;
 
@@ -31,26 +28,51 @@ public class CclCodeBlock {
 	private String afterCondition;
 	private CclCodePart following;
 	
-	public CclCodeBlock(CclCodePart codePart, CclCodePart following) {
+	public CclCodeBlock(CclCodePart codePart, CclCodePart following) throws ImplementationException {
 		this.codePart = codePart;
 		this.following = following;
 		analyze();
 	}
 
-	private void analyze() {
+	private void analyze() throws ImplementationException {
+		int index = 0;
 		String raw = codePart.getRaw().trim();
-		Matcher m = BASE_PATTERN.matcher(raw);
-		m.matches();
-		this.before = m.group(1).trim();
-		this.content = m.group(2).trim();
-		m = CONDITION_PATTERN.matcher(before);
-		if(m.matches()){
-			this.keyword = m.group(1).trim();
-			this.condition = m.group(2).trim();
-			this.afterCondition = m.group(3).trim();
-		}else if((m = KEYWORD_PATTERN.matcher(before)).find()){
-			this.keyword = m.group(1).trim();
+
+		//parse keyword
+		StringBuilder kw = new StringBuilder();
+		while((raw.charAt(index) != '{') && (raw.charAt(index) != '(')){
+			kw.append(raw.charAt(index));
+			index++;
 		}
+		this.keyword = kw.toString();
+
+		//has condition?
+		if(raw.charAt(index) == '('){
+			//parse condition
+			StringBuilder cnd = new StringBuilder();
+			LayerState s = new LayerState(new char[]{'('}, new char[]{')'});
+			do{
+				s.feed(raw.charAt(index));
+				cnd.append(raw.charAt(index));
+				index++;
+			}while(!s.isBiggest(0));
+			this.condition = cnd.substring(1, cnd.length() - 1);
+
+			//parse after condition
+			StringBuilder acd = new StringBuilder();
+			while(raw.charAt(index) != '{'){
+				acd.append(raw.charAt(index));
+				index++;
+			}
+			this.afterCondition = acd.toString();
+		}
+		parseMainContent(index, raw);
+	}
+
+	private void parseMainContent(int startIndex, String raw) throws ImplementationException {
+		this.before = raw.substring(0, startIndex);
+		this.content = raw.substring(startIndex);
+		this.content = content.substring(1, content.length() - 1);
 	}
 
 	public String compile() throws DebugException, ImplementationException, IOException {
