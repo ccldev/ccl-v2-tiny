@@ -44,7 +44,7 @@ public class CclCodeBlock {
 			kw.append(raw.charAt(index));
 			index++;
 		}
-		this.keyword = kw.toString();
+		this.keyword = kw.toString().trim();
 
 		//has condition?
 		if(raw.charAt(index) == '('){
@@ -56,7 +56,7 @@ public class CclCodeBlock {
 				cnd.append(raw.charAt(index));
 				index++;
 			}while(!s.isBiggest(0));
-			this.condition = cnd.substring(1, cnd.length() - 1);
+			this.condition = cnd.substring(1, cnd.length() - 1).trim();
 
 			//parse after condition
 			StringBuilder acd = new StringBuilder();
@@ -64,15 +64,15 @@ public class CclCodeBlock {
 				acd.append(raw.charAt(index));
 				index++;
 			}
-			this.afterCondition = acd.toString();
+			this.afterCondition = acd.toString().trim();
 		}
 		parseMainContent(index, raw);
 	}
 
 	private void parseMainContent(int startIndex, String raw) throws ImplementationException {
-		this.before = raw.substring(0, startIndex);
+		this.before = raw.substring(0, startIndex).trim();
 		this.content = raw.substring(startIndex);
-		this.content = content.substring(1, content.length() - 1);
+		this.content = content.substring(1, content.length() - 1).trim();
 	}
 
 	public String compile() throws DebugException, ImplementationException, IOException {
