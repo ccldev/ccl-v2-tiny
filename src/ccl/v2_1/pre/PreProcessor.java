@@ -9,7 +9,7 @@ import io.github.coalangsoft.cclproject.CompileSystems;
 
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import io.github.coalangsoft.lib.log.Logger;
+import io.github.coalangsoft.lib.log.TimeLogger;
 
 import javax.swing.*;
 
