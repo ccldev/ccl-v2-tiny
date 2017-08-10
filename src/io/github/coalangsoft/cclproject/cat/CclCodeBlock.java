@@ -67,6 +67,9 @@ public class CclCodeBlock {
 			this.afterCondition = acd.toString().trim();
 		}
 		parseMainContent(index, raw);
+		if(condition == null){
+			condition = "";
+		}
 	}
 
 	private void parseMainContent(int startIndex, String raw) throws ImplementationException {
