@@ -1,5 +1,6 @@
 package ccl.v2_1.layers;
 
+import ccl.v2_1.err.DebugException;
 import io.github.coalangsoft.lib.data.Func;
 
 import java.util.Arrays;
@@ -68,6 +69,9 @@ public class LayerState {
 			}
 			if(c == closers[i]){
 				layers[i]--;
+				if(layers[i] < 0){
+					throw new RuntimeException("Negative layer depth - Layer closed too often!\n: " + getDebugInfo());
+				}
 			}
 		}
 	}
